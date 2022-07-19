@@ -26,7 +26,7 @@ class ProductoFactory extends Factory
             'precio' => $this->faker->randomFloat(2, 0, 100),
             'oferta' => $this->faker->randomFloat(2, 0, 100),
             'categoria_id' => $this->faker->numberBetween(1, 12),
-            'empresa_id' => $this->faker->numberBetween(1, 10),
+            'empresa_id' => $this->faker->numberBetween(1, 5),
             'created_at' => $this->faker->date('Y-m-d H:i:s'),
             'updated_at' => $this->faker->date('Y-m-d H:i:s')
         ];

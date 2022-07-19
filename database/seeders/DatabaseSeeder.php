@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Categoria;
 use App\Models\Empresa;
 use App\Models\Producto;
+use Elastic\Elasticsearch\ClientBuilder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -18,6 +19,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $client = ClientBuilder::create()->build();
+        $client->indices()->delete(['index' => 'productos']);
+        $client->indices()->create(['index' => 'productos']);
+
         // \App\Models\User::factory(10)->create();
 
         // \App\Models\User::factory()->create([
@@ -40,7 +45,7 @@ class DatabaseSeeder extends Seeder
             ['nombre' => 'Varios']
         ]);
 
-        Empresa::factory(10)->create();
-        Producto::factory(500)->create();
+        Empresa::factory(5)->create();
+        Producto::factory(30)->create();
     }
 }

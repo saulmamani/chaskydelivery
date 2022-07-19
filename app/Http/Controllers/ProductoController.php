@@ -27,6 +27,26 @@ class ProductoController extends Controller
         return response()->json($productos);
     }
 
+    public function search(Request $request){
+        $txtBuscar = $request->input('txtBuscar');
+
+        if(!isset($txtBuscar))
+            $txtBuscar = '%';
+
+        $productos = Producto::with(['categoria', 'empresa:id,nombre,direccion,celular'])
+            ->where(function($query) use ($txtBuscar){
+                $query->where('nombre', 'ilike', '%'.$txtBuscar.'%')
+                    ->orWhere('descripcion', 'ilike', '%'.$txtBuscar.'%')
+                    ->orWhereHas('categoria', function($query) use ($txtBuscar){
+                        $query->where('nombre', 'ilike', '%'.$txtBuscar.'%');
+                    });
+            })
+            ->orderBy('precio')
+            ->orderBy('oferta')
+            ->get();
+        return response()->json($productos);
+    }
+
     public function store(Request $request){
         $producto = Producto::create($request->all());
         return response()->json($producto);
