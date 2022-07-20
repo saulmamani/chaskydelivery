@@ -46,6 +46,6 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Empresa::factory(5)->create();
-        Producto::factory(30)->create();
+        Producto::factory(90)->create();
     }
 }

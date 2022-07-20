@@ -19,4 +19,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('productos', \App\Http\Controllers\ProductoController::class);
-Route::get('seach', \App\Http\Controllers\ProductoController::class.'@search');
+Route::get('search', \App\Http\Controllers\ProductoController::class.'@search');
+
+Route::get('search-mobile', \App\Http\Controllers\ProductoElasticController::class.'@searchMobile');

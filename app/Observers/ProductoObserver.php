@@ -58,7 +58,11 @@ class ProductoObserver
      */
     public function deleted(Producto $producto)
     {
-        //
+        $this->client->delete([
+            'index' => 'productos',
+            'type' => 'producto',
+            'id' => $producto->id
+        ]);
     }
 
     /**
