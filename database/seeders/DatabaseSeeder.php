@@ -19,9 +19,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $client = ClientBuilder::create()->build();
-        $client->indices()->delete(['index' => 'productos']);
-        $client->indices()->create(['index' => 'productos']);
+ //       $client = ClientBuilder::create()->build();
+//        $client->indices()->delete(['index' => 'productos']);
+//        $client->indices()->create(['index' => 'productos']);
 
         // \App\Models\User::factory(10)->create();
 
@@ -47,5 +47,6 @@ class DatabaseSeeder extends Seeder
 
         Empresa::factory(5)->create();
         Producto::factory(90)->create();
+
     }
 }

@@ -27,6 +27,7 @@ class ProductoObserver
             'type' => 'producto',
             'id' => $producto->id,
             'body' => [
+                'phonetic' => $producto->nombre,
                 'nombre' => $producto->nombre,
                 'descripcion' => $producto->descripcion,
                 'categoria' => $producto->categoria->nombre,

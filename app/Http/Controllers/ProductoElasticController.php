@@ -13,21 +13,28 @@ class ProductoElasticController extends Controller
         if (!isset($txtBuscar))
             $txtBuscar = '';
 
-        $productos = $client->search([
+        //multi-match search by phonetic, descripcion
+        $params = [
             'index' => 'productos',
+            'type' => 'producto',
             'body' => [
                 'query' => [
                     'match' => [
-                        'nombre' => $txtBuscar
+                        'nombre' => [
+                            'query' => $txtBuscar,
+                            'fuzziness' => 3
+                        ]
                     ]
-                ],
+                ]
             ]
+        ];
+
+        $productos = $client->search($params);
+        $total = $productos['hits']['total']['value'];
+
+        return response()->json([
+            "total" => $total,
+            "data" => $productos['hits']['hits']
         ]);
-
-$total = $productos['hits']['total']['value'];
-error_log($total);
-
-        //dd($productos);
-        return response()->json($productos['hits']['hits']);
     }
 }
